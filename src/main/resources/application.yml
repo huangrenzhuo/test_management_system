@@ -1,0 +1,23 @@
+debug: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  database:
+    type: mysql
+  mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml,classpath*:mapper/*.xml
+  mapperLocations: classpath*:mapper/*.xml,classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
+  model:
+    pack: com.huang.springbootdemo.entity
+  table:
+    auto: update
+  type-aliases-package: com.huang.springbootdemo.entity
+server:
+  port: 8088
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: huangrenzhuo.123
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+
+
