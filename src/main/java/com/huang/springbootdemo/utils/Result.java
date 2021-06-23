@@ -43,7 +43,7 @@ public class Result<T> implements Serializable {
     public static Result<Void> success() {
         Result<Void> result = new Result<>();
         result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("success");
+        result.message = ResultCode.SUCCESS.getMessage();
         return result;
     }
 
@@ -51,33 +51,28 @@ public class Result<T> implements Serializable {
     public static <V> Result<V> success(V data) {
         Result<V> result = new Result<>();
         result.code = ResultCode.SUCCESS.getCode();
-        result.setMessage("success");
+        result.message = ResultCode.SUCCESS.getMessage();
         result.data = data;
         return result;
     }
 
+    //Void是一个不可实例化的类
+    //因为Void是一个不可实例化的类，如果方法返回值是Void类型，那么该方法只能返回null
     //失败
     public static Result<Void> failure() {
         Result<Void> result = new Result<>();
         result.setCode(ResultCode.FAILURE.getCode());
-        result.setMessage("failure");
+        result.message = ResultCode.FAILURE.getMessage();
         return result;
     }
 
-    //失败,自定义数据
-    public static Result<Void> failure(String message) {
-        Result<Void> result = new Result<>();
-        result.setCode(ResultCode.FAILURE.getCode());
-        result.setMessage("failure");
+    //自定义失败
+    public static Result fail(Integer code, String message) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMessage(message);
         return result;
     }
 
-    //失败，使用已定义枚举
-    public static Result<Void> failure(ResultCode resultCode) {
-        Result<Void> result = new Result<>();
-        result.setCode(resultCode.getCode());
-        result.setMessage("failure");
-        return result;
-    }
 
 }

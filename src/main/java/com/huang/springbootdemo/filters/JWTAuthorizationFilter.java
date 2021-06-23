@@ -37,7 +37,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         if (_token == null || !_token.startsWith(JWTUtils.token_prefix)) {
             response.setCharacterEncoding("UTF-8");
             Result<Void> result = new Result<>();
-            ResponseUtils.FailResponse(response, "token为空或不符合规范");
+            ResponseUtils.FailResponse(response, ResultCode.USER_TOKEN_ERROR);//token为空或者不符合规范
             return;
         } else {
             String token = _token.substring(6);
@@ -51,19 +51,19 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 }
             } catch (SignatureVerificationException e) {
                 e.printStackTrace();
-                ResponseUtils.FailResponse(response, "签名错误");
+                ResponseUtils.FailResponse(response, ResultCode.USER_TOKEN_SIGNATURE);//签名错误
                 return;
             } catch (TokenExpiredException e) {
                 e.printStackTrace();
-                ResponseUtils.FailResponse(response, "token过期");
+                ResponseUtils.FailResponse(response, ResultCode.USER_TOKEN_EXPIRED);//过期
                 return;
             } catch (AlgorithmMismatchException e) {
                 e.printStackTrace();
-                ResponseUtils.FailResponse(response, "token算法不一致");
+                ResponseUtils.FailResponse(response, ResultCode.USER_TOKEN_AlgorithmMis_Match);//算法错误
                 return;
             } catch (Exception e) {
                 e.printStackTrace();
-                ResponseUtils.FailResponse(response, "其他错误");
+                ResponseUtils.FailResponse(response,ResultCode.USER_TOKEN_Other_ERROR);//其他错误
                 return;
             }
 

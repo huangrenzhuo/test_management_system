@@ -23,7 +23,7 @@ public class Controller {
 
     @RequestMapping("/hello")
     public Result<String> hello(HttpServletResponse response) throws IOException {
-        return Result.success("/hello");
+        return Result.success("hello");
 
 
     }

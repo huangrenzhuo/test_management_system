@@ -14,15 +14,24 @@ public class ResponseUtils {
         response.setContentType("application/json; charset=utf-8");
         Result<Void> result = new Result<>();
         result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("success");
+        result.setMessage(ResultCode.SUCCESS.getMessage());
         response.getWriter().print(JSON.toJSONString(result));
     }
 
-    public static void FailResponse(HttpServletResponse response,String string) throws IOException {
+    public static void FailResponse(HttpServletResponse response,ResultCode resultCode) throws IOException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
         Result<Void> result = new Result<>();
-        result.setCode(ResultCode.FAILURE.getCode());
+        result.setCode(resultCode.getCode());
+        result.setMessage(resultCode.getMessage());
+        response.getWriter().print(JSON.toJSONString(result));
+    }
+
+    public static void FailResponse(HttpServletResponse response,Integer code, String string) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        Result<Void> result = new Result<>();
+        result.setCode(code);
         result.setMessage(string);
         response.getWriter().print(JSON.toJSONString(result));
     }

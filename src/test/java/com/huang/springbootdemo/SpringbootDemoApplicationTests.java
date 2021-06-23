@@ -28,7 +28,7 @@ class SpringbootDemoApplicationTests {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String passHash = encoder.encode("123456");
 //        System.out.println(encoder.matches("123456",passHash));
-      myUserMapper.addUser("huang",passHash,"student");
+      myUserMapper.addUser("di",passHash,"administrator");
     }
 
 }

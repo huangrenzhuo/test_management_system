@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huang.springbootdemo.entity.MyUser;
 import com.huang.springbootdemo.utils.JWTUtils;
 import com.huang.springbootdemo.utils.ResponseUtils;
+import com.huang.springbootdemo.utils.ResultCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -66,7 +67,9 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
  //上面的函数失败就会执行这个方法
     @Override
     public void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        ResponseUtils.FailResponse(response,"认证失败");
+        //403 Forbidden
+        ResponseUtils.FailResponse(response, ResultCode. USER_NOT_LOGIN_ERROR);
+        return;
     }
 
 }
