@@ -12,7 +12,7 @@ public class MyUser {
     @Column(name = "password", type = MySqlTypeConstant.VARCHAR, length = 111)
     private String password;
     @Column(name = "authority", type = MySqlTypeConstant.VARCHAR, length = 111)
-    private Authority authority;
+    private String authority;
 
     public String getPassword() {
         return password;
@@ -23,7 +23,7 @@ public class MyUser {
         return username;
     }
 
-    public Authority getAuthority() {
+    public String getAuthority() {
         return authority;
     }
 }
