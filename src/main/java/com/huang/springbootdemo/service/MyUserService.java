@@ -19,7 +19,7 @@ public class MyUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyUser myUser = myUserMapper.getMyUser(username);
+        MyUser myUser = myUserMapper.getUser(username);
         UserDetails userDetails = User.withUsername(myUser.getUsername()).password(myUser.getPassword()).authorities("p1").roles().build();
         return userDetails;
     }

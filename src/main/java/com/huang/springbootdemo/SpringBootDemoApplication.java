@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
-
 @ComponentScan({"com.gitee.sunchenbin.mybatis.actable.manager.*"})
 @MapperScan({"com.gitee.sunchenbin.mybatis.actable.dao.*","com.huang.springbootdemo.mapper"})
-@ComponentScan("com.huang.springbootdemo.entity")
+@ComponentScan("com.huang.springbootdemo.controller")
 @ComponentScan("com.huang.springbootdemo.entity")
 public class SpringBootDemoApplication {
 

@@ -7,11 +7,11 @@ import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 @Table(name="user")
 public class MyUser {
 
-    @Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
+    @Column(name = "username", type = MySqlTypeConstant.VARCHAR, length = 111)
     private String username;
-    @Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
+    @Column(name = "password", type = MySqlTypeConstant.VARCHAR, length = 111)
     private String password;
-    @Column(name = "name",type = MySqlTypeConstant.VARCHAR,length = 111)
+    @Column(name = "authority", type = MySqlTypeConstant.VARCHAR, length = 111)
     private Authority authority;
 
     public String getPassword() {
