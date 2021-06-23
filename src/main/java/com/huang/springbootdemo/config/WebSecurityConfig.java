@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers().hasAuthority("administrator")//只有拥有这个权限才可以访问
-                .antMatchers().hasAnyAuthority("  ")//拥有其中一个就可以访问
+                .antMatchers().hasAnyAuthority(" responsible_man", "administrator")//拥有其中一个就可以访问
                 .antMatchers().hasRole("")//基于角色的控制访问在service生成时前面要加ROLE_,这里不用加
                 .antMatchers().hasAnyRole("")
                 .anyRequest().authenticated()
