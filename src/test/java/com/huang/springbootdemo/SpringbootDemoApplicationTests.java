@@ -20,6 +20,7 @@ class SpringbootDemoApplicationTests {
     @Resource
     MyUserMapper myUserMapper;
 
+    @Resource
     PasswordEncoder passwordEncoder;
 
     @Test
@@ -28,7 +29,7 @@ class SpringbootDemoApplicationTests {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String passHash = encoder.encode("123456");
 //        System.out.println(encoder.matches("123456",passHash));
-      myUserMapper.addUser("di",passHash,"administrator");
+      myUserMapper.addUser("k",passHash,"administrator");
     }
 
 }

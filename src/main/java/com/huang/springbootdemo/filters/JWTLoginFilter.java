@@ -1,5 +1,7 @@
 package com.huang.springbootdemo.filters;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huang.springbootdemo.entity.MyUser;
@@ -11,12 +13,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StreamUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +42,15 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         ;
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            MyUser myUser = objectMapper.readValue(request.getInputStream(), MyUser.class);
-            String username = myUser.getUsername();
-            String password = myUser.getPassword();
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//            MyUser myUser = objectMapper.readValue(request.getInputStream(), MyUser.class);
+//            String username = myUser.getUsername();
+//            String password = myUser.getPassword();
+            String body= StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
+            JSONObject jsonObject= JSON.parseObject(body);
+            String username=jsonObject.getString("username");
+            String password=jsonObject.getString("password");
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             return authenticationManager.authenticate(authRequest);
             //交给Spring security框架去验证

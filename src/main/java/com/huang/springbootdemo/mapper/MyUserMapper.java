@@ -11,8 +11,10 @@ import org.springframework.stereotype.Repository;
 public interface MyUserMapper {
 
     @Select("select *from user where username=#{username}")
-    public MyUser getUser(String username);
+    MyUser getUser(String username);
+
     @Insert("insert into user(username,password,authority) values(#{username},#{password},#{authority})")
-    public void  addUser(String username,String password,String authority);
+    void addUser(String username, String password, String authority);
+
 
 }

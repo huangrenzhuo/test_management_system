@@ -4,7 +4,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 
-@Table(name="user")
+@Table(name = "user")
 public class MyUser {
 
     @Column(name = "username", type = MySqlTypeConstant.VARCHAR, length = 111)
@@ -26,4 +26,18 @@ public class MyUser {
     public String getAuthority() {
         return authority;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+
 }
