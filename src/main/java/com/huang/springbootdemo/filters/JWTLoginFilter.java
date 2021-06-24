@@ -40,17 +40,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        ;
+
         try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//            MyUser myUser = objectMapper.readValue(request.getInputStream(), MyUser.class);
-//            String username = myUser.getUsername();
-//            String password = myUser.getPassword();
-            String body= StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
-            JSONObject jsonObject= JSON.parseObject(body);
-            String username=jsonObject.getString("username");
-            String password=jsonObject.getString("password");
+            String body = StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
+            JSONObject jsonObject = JSON.parseObject(body);
+            String username = jsonObject.getString("username");
+            String password = jsonObject.getString("password");
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             return authenticationManager.authenticate(authRequest);
             //交给Spring security框架去验证
@@ -60,7 +55,8 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         return null;
 
     }
-//上面的函数成功就会执行这个方法
+
+    //上面的函数成功就会执行这个方法
     @Override
     public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws
             IOException, ServletException {
@@ -72,11 +68,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         ResponseUtils.SuccessResponse(response);
     }
 
- //上面的函数失败就会执行这个方法
+    //上面的函数失败就会执行这个方法
     @Override
     public void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         //403 Forbidden
-        ResponseUtils.FailResponse(response, ResultCode. USER_NOT_LOGIN_ERROR);
+        ResponseUtils.FailResponse(response, ResultCode.USER_NOT_LOGIN_ERROR);
         return;
     }
 

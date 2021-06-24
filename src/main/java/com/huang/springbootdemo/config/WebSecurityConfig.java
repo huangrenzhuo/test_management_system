@@ -2,7 +2,7 @@ package com.huang.springbootdemo.config;
 
 import com.huang.springbootdemo.filters.JWTAuthorizationFilter;
 import com.huang.springbootdemo.filters.JWTLoginFilter;
-import com.huang.springbootdemo.service.MyUserService;
+import com.huang.springbootdemo.service.MyUser.MyUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

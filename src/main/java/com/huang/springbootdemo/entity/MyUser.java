@@ -7,7 +7,7 @@ import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 @Table(name = "user")
 public class MyUser {
 
-    @Column(name = "username", type = MySqlTypeConstant.VARCHAR, length = 111)
+    @Column(name = "username", type = MySqlTypeConstant.VARCHAR,isKey = true, length = 111)
     private String username;
     @Column(name = "password", type = MySqlTypeConstant.VARCHAR, length = 111)
     private String password;

@@ -1,4 +1,4 @@
-package com.huang.springbootdemo.service;
+package com.huang.springbootdemo.service.MyUser;
 
 import com.huang.springbootdemo.mapper.MyUserMapper;
 import com.huang.springbootdemo.entity.MyUser;

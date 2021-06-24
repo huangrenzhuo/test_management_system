@@ -5,13 +5,11 @@ package com.huang.springbootdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.huang.springbootdemo.entity.MyUser;
 import com.huang.springbootdemo.mapper.MyUserMapper;
-import com.huang.springbootdemo.service.MyUserService;
+import com.huang.springbootdemo.service.MyUser.MyUserService;
 import com.huang.springbootdemo.utils.Result;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,14 +33,14 @@ public class Controller {
     MyUserService myUserService;
 
     @RequestMapping("/register")
-    public Result<String> register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+    public Result<Void> register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         String body= StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
         JSONObject jsonObject=JSON.parseObject(body);
         String username=jsonObject.getString("username");
         String password=jsonObject.getString("password");
         String authority=jsonObject.getString("authority");
         myUserService.register(username,password,authority);
-        return Result.success("");
+        return Result.success();
     }
 
     @RequestMapping("/hello")
