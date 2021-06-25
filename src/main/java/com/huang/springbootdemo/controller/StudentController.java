@@ -22,7 +22,8 @@ import java.nio.charset.StandardCharsets;
 //获取  get
 //更新  put
 //删除  delete
-@RestController("/student")
+@RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Resource
