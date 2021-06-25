@@ -29,7 +29,7 @@ public class MyUserService implements UserDetailsService {
         //根据username查询数据库
         MyUser myUser = myUserMapper.getUser(username);
         //返回UserDetails
-        UserDetails userDetails = User.withUsername(myUser.getUsername()).password(myUser.getPassword()).authorities(myUser.getAuthority()).roles().build();
+        UserDetails userDetails = User.withUsername(myUser.getUsername()).password(myUser.getPassword()).authorities(myUser.getAuthority()).build();
         return userDetails;
     }
 
