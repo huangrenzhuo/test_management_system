@@ -6,6 +6,7 @@ import com.huang.springbootdemo.service.Pro_Answer.Pro_AnswerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class Pro_AnswerServiceImpl implements Pro_AnswerService {
@@ -17,5 +18,11 @@ public class Pro_AnswerServiceImpl implements Pro_AnswerService {
     public Pro_Answer getAnswerProById(int pro_no) {
         Pro_Answer pro_answer = pro_answerMapper.getAnswerProById(pro_no);
         return pro_answer;
+    }
+
+    @Override
+    public List<Integer> getAllAnswerId() {
+        List<Integer> list = pro_answerMapper.getAllAnswerId();
+        return list;
     }
 }
