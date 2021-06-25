@@ -6,6 +6,7 @@ import com.huang.springbootdemo.service.Pro_Choice.Pro_ChoiceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class Pro_ChoiceServiceImpl implements Pro_ChoiceService {
@@ -17,5 +18,11 @@ public class Pro_ChoiceServiceImpl implements Pro_ChoiceService {
     public Pro_Choice getChoiceProById(int pro_no) {
         Pro_Choice pro_choice = pro_choiceMapper.getChoiceProById(pro_no);
         return pro_choice;
+    }
+
+    @Override
+    public List<Integer> getAllChoiceId() {
+        List<Integer> list = pro_choiceMapper.getAllChoiceId();
+        return list;
     }
 }
