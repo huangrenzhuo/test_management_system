@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(myUserService).passwordEncoder(passwordEncoder());
     }
 
-    //将加密器放在容器中
+    //将加密器放在容器中 没有自定义 直接new BCryptPasswordEncoder
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

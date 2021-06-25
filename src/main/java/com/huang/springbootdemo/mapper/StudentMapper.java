@@ -1,8 +1,14 @@
 package com.huang.springbootdemo.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
+
+@Mapper
+@Repository
 public interface StudentMapper {
+
     @Update("update student set name=#{name} where username=#{username} ")
     void updateName(String name, String username);
 
