@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+/***
+ * 实现UserDetailsService接口
+ */
 @Service
 public class MyUserService implements UserDetailsService {
 
@@ -23,7 +26,9 @@ public class MyUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //根据username查询数据库
         MyUser myUser = myUserMapper.getUser(username);
+        //返回UserDetails
         UserDetails userDetails = User.withUsername(myUser.getUsername()).password(myUser.getPassword()).authorities(myUser.getAuthority()).roles().build();
         return userDetails;
     }
