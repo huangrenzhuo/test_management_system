@@ -13,6 +13,11 @@ public class StudentServiceImpl implements StudentService {
     StudentMapper studentMapper;
 
     @Override
+    public void addStudent(String username, String name, String id, String _class, String school, String grade, String sex, String email) {
+        studentMapper.addStudent(username,name,id,_class,school,grade,sex,email);
+    }
+
+    @Override
     public void updateName(String name, String username) {
         studentMapper.updateName(name, username);
     }

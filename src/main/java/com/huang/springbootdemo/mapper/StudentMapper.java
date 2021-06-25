@@ -1,5 +1,6 @@
 package com.huang.springbootdemo.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface StudentMapper {
+
+    @Insert("insert into student(username,name,id,_class,school,grade,sex,email) values(#{username},#{name},#{id},#{_class},#{school},#{grade},#{sex},#{email})")
+    void addStudent(String username, String name,String id,String _class,String school,String grade,String sex,String email);
 
     @Update("update student set name=#{name} where username=#{username} ")
     void updateName(String name, String username);

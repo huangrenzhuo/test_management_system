@@ -2,6 +2,7 @@ package com.huang.springbootdemo.service.MyUser;
 
 import com.huang.springbootdemo.mapper.MyUserMapper;
 import com.huang.springbootdemo.entity.MyUser;
+import com.huang.springbootdemo.mapper.StudentMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,9 @@ public class MyUserService implements UserDetailsService {
     MyUserMapper myUserMapper;
 
     @Resource
+    StudentMapper studentMapper;
+
+    @Resource
     PasswordEncoder passwordEncoder;
 
     @Override
@@ -36,5 +40,6 @@ public class MyUserService implements UserDetailsService {
 
     public void register(String username, String password, String authority) {
         myUserMapper.addUser(username, passwordEncoder.encode(password), authority);
+
     }
 }
