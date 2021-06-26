@@ -6,6 +6,7 @@ import com.huang.springbootdemo.entity.Paper;
 import com.huang.springbootdemo.entity.Pro_Answer;
 import com.huang.springbootdemo.entity.Pro_Choice;
 import com.huang.springbootdemo.entity.Pro_Completion;
+import com.huang.springbootdemo.service.Paper.PaperService;
 import com.huang.springbootdemo.service.Pro_Answer.Pro_AnswerService;
 import com.huang.springbootdemo.service.Pro_Choice.Pro_ChoiceService;
 import com.huang.springbootdemo.service.Pro_Completion.Pro_CompletionService;
@@ -37,6 +38,9 @@ public class TeacherController {
     @Resource
     Pro_AnswerService pro_answerService;
 
+    @Resource
+    PaperService paperService;
+
     @RequestMapping(value = "/problem", method = RequestMethod.GET)
     public Result<Object> getProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
@@ -57,7 +61,7 @@ public class TeacherController {
         }
     }
 
-    @RequestMapping("/getRandomPaper")
+    @RequestMapping(value = "/randomPaper", method = RequestMethod.GET)
     public Result<Object> getRandomPaper(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
         JSONObject jsonObject = JSON.parseObject(body);
@@ -73,6 +77,11 @@ public class TeacherController {
         List<Pro_Completion> completionList = new ArrayList<>();
         List<Pro_Answer> answerList = new ArrayList<>();
 
+        List<Integer> choiceIdListInPaper = new ArrayList<>();
+        List<Integer> answerIdListInPaper = new ArrayList<>();
+        List<Integer> completionIdListInPaper = new ArrayList<>();
+
+
         if (choiceNum > choiceIdList.size()) {
             return Result.fail(-1, "所选选择题数量超过题库总量");
         } else if (answerNum > answerIdList.size()) {
@@ -80,21 +89,55 @@ public class TeacherController {
         } else if (completionNum > completionIdList.size()) {
             return Result.fail(-1, "所选填空题数量超过题库总量");
         } else {
-            for(int index : RandomUtils.getNIntBetweenRange(0,choiceIdList.size()-1,choiceNum)){
+            for (int index : RandomUtils.getNIntBetweenRange(0, choiceIdList.size() - 1, choiceNum)) {
                 choiceList.add(pro_choiceService.getChoiceProById(choiceIdList.get(index)));
+                choiceIdListInPaper.add(choiceIdList.get(index));
             }
-            for(int index : RandomUtils.getNIntBetweenRange(0,answerIdList.size()-1,answerNum)){
+            for (int index : RandomUtils.getNIntBetweenRange(0, answerIdList.size() - 1, answerNum)) {
                 answerList.add(pro_answerService.getAnswerProById(answerIdList.get(index)));
+                answerIdListInPaper.add(answerIdList.get(index));
             }
-            for(int index : RandomUtils.getNIntBetweenRange(0,completionIdList.size()-1,completionNum)){
+            for (int index : RandomUtils.getNIntBetweenRange(0, completionIdList.size() - 1, completionNum)) {
                 completionList.add(pro_completionService.getCompletionProById(completionIdList.get(index)));
+                completionIdListInPaper.add(completionIdList.get(index));
             }
-            //待改！！！ID_LIST
-            Paper paper = new Paper(choiceList,answerList,completionList,null,null,null);
-//            Paper paper = new Paper(choiceList,answerList,completionList,JSON.toJSONString(choiceIdList),JSON.toJSONString(answerIdList),JSON.toJSONString(completionIdList));
+            Paper paper = new Paper(choiceList, answerList, completionList, JSON.toJSONString(choiceIdListInPaper), JSON.toJSONString(answerIdListInPaper), JSON.toJSONString(completionIdListInPaper));
+            paperService.insertPaper(paper);
             return Result.success(paper);
         }
 
+    }
+
+    @RequestMapping(value = "/paper", method = RequestMethod.GET)
+    public Result<Object> getPaperById(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        int paper_no = jsonObject.getInteger("paper_no");
+        Paper paper = paperService.getPaperById(paper_no);
+
+        if (paper == null) {
+            return Result.fail(-1, "不存在该试卷");
+        }
+        List<Pro_Choice> choiceList = new ArrayList<>();
+        List<Pro_Completion> completionList = new ArrayList<>();
+        List<Pro_Answer> answerList = new ArrayList<>();
+
+        List<Integer> choiceIdList = JSON.parseArray(paper.getChoice_string(), Integer.class);
+        List<Integer> completionIdList = JSON.parseArray(paper.getChoice_string(), Integer.class);
+        List<Integer> answerIdList = JSON.parseArray(paper.getChoice_string(), Integer.class);
+        for (int id : choiceIdList) {
+            choiceList.add(pro_choiceService.getChoiceProById(id));
+        }
+        for (int id : completionIdList) {
+            completionList.add(pro_completionService.getCompletionProById(id));
+        }
+        for (int id : answerIdList) {
+            answerList.add(pro_answerService.getAnswerProById(id));
+        }
+        paper.setChoices(choiceList);
+        paper.setAnswers(answerList);
+        paper.setCompletions(completionList);
+        return Result.success(paper);
     }
 
 

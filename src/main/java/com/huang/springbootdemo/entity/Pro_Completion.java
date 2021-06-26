@@ -18,6 +18,8 @@ public class Pro_Completion {
     private String answer;
     @Column(name = "explanation",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String explanation;
+    @Column(name = "subject",type = MySqlTypeConstant.VARCHAR,length = 255)
+    private  String subject;
 
     public int getPro_no() {
         return pro_no;

@@ -25,6 +25,13 @@ public class Paper {
     @Column(name = "completion_string", type = MySqlTypeConstant.VARCHAR, length = 2000)
     private String completion_string;
 
+    public Paper(int paper_no, String choice_string, String answer_string, String completion_string) {
+        this.paper_no = paper_no;
+        this.choice_string = choice_string;
+        this.answer_string = answer_string;
+        this.completion_string = completion_string;
+    }
+
     public Paper(String choice_string, String answer_string, String completion_string) {
         this.choice_string = choice_string;
         this.answer_string = answer_string;
@@ -66,6 +73,18 @@ public class Paper {
 
     public List<Pro_Completion> getCompletions() {
         return completions;
+    }
+
+    public void setChoices(List<Pro_Choice> choices) {
+        this.choices = choices;
+    }
+
+    public void setAnswers(List<Pro_Answer> answers) {
+        this.answers = answers;
+    }
+
+    public void setCompletions(List<Pro_Completion> completions) {
+        this.completions = completions;
     }
 }
 
