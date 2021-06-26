@@ -1,6 +1,4 @@
 mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
   database:
     type: mysql
   mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml,classpath*:mapper/*.xml
