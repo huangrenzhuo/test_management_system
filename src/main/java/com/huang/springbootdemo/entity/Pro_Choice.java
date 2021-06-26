@@ -58,6 +58,10 @@ public class Pro_Choice {
         return explanation;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
     public void setPro_no(int pro_no) {
         this.pro_no = pro_no;
     }
@@ -90,4 +94,14 @@ public class Pro_Choice {
         this.explanation = explanation;
     }
 
+    public Pro_Choice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject) {
+        this.pro_detail = pro_detail;
+        this.choice_a = choice_a;
+        this.choice_b = choice_b;
+        this.choice_c = choice_c;
+        this.choice_d = choice_d;
+        this.answer = answer;
+        this.explanation = explanation;
+        this.subject = subject;
+    }
 }

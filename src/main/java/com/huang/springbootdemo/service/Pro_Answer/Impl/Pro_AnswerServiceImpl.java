@@ -25,4 +25,10 @@ public class Pro_AnswerServiceImpl implements Pro_AnswerService {
         List<Integer> list = pro_answerMapper.getAllAnswerId();
         return list;
     }
+
+    @Override
+    public int insertAnswer(String pro_detail, String answer, String explanation, String subject) {
+        int result = pro_answerMapper.insertAnswer(pro_detail, answer, explanation, subject);
+        return 0;
+    }
 }

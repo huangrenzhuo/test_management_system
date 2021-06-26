@@ -25,4 +25,11 @@ public class Pro_CompletionServiceImpl implements Pro_CompletionService {
         List<Integer> list = pro_completionMapper.getAllCompletionId();
         return list;
     }
+
+    @Override
+    public int insertCompletion(String pro_detail, int blank_num, String answer, String explanation, String subject) {
+        int result = pro_completionMapper.insertCompletion(pro_detail, blank_num, answer, explanation, subject);
+        return result;
+    }
+
 }

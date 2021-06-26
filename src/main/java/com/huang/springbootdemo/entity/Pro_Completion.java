@@ -40,4 +40,16 @@ public class Pro_Completion {
     public String getExplanation() {
         return explanation;
     }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public Pro_Completion(String pro_detail, int blank_num, String answer, String explanation, String subject) {
+        this.pro_detail = pro_detail;
+        this.blank_num = blank_num;
+        this.answer = answer;
+        this.explanation = explanation;
+        this.subject = subject;
+    }
 }

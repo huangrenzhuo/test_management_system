@@ -7,5 +7,8 @@ import java.util.List;
 public interface Pro_AnswerService {
 
     Pro_Answer getAnswerProById(int pro_no);
+
     List<Integer> getAllAnswerId();
+
+    int insertAnswer(String pro_detail, String answer, String explanation, String subject);
 }

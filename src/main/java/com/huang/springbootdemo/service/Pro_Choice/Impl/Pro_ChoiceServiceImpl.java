@@ -25,4 +25,17 @@ public class Pro_ChoiceServiceImpl implements Pro_ChoiceService {
         List<Integer> list = pro_choiceMapper.getAllChoiceId();
         return list;
     }
+
+    @Override
+    public int insertChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject) {
+        int result = pro_choiceMapper.insertChoice(pro_detail, choice_a, choice_b, choice_c, choice_d, answer, explanation, subject);
+        return result;
+    }
+
+    @Override
+    public int updateChoice(Pro_Choice pro_choice) {
+        return 0;
+    }
+
+
 }

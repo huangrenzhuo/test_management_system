@@ -61,6 +61,36 @@ public class TeacherController {
         }
     }
 
+
+    @RequestMapping(value = "/problem", method = RequestMethod.POST)
+    public Result<Object> putProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        String pro_type = jsonObject.getString("pro_type");
+        String pro_detail = jsonObject.getString("pro_detail");
+        String answer = jsonObject.getString("answer");
+        String explanation = jsonObject.getString("explanation");
+        String subject = jsonObject.getString("subject");
+
+        if (pro_type.equals("pro_choice")) {
+            String choice_a = jsonObject.getString("choice_a");
+            String choice_b = jsonObject.getString("choice_b");
+            String choice_c = jsonObject.getString("choice_c");
+            String choice_d = jsonObject.getString("choice_d");
+            int result = pro_choiceService.insertChoice(pro_detail, choice_a, choice_b, choice_c, choice_d, answer, explanation, subject);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_answer")) {
+            int result = pro_answerService.insertAnswer(pro_detail, answer, explanation, subject);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_completion")) {
+            int blank_num = jsonObject.getInteger("blank_num");
+            int result = pro_completionService.insertCompletion(pro_detail, blank_num, answer, explanation, subject);
+            return Result.success(result);
+        } else {
+            return Result.fail(-1, "错误的pro_type格式");
+        }
+    }
+
     @RequestMapping(value = "/randomPaper", method = RequestMethod.GET)
     public Result<Object> getRandomPaper(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
