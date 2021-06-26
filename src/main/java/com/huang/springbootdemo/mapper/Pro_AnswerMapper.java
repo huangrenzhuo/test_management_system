@@ -23,4 +23,8 @@ public interface Pro_AnswerMapper {
 
     @Insert("insert into pro_answer(pro_detail, answer, explanation, subject) values(#{pro_detail}, #{answer}, #{explanation}, #{subject})")
     int insertAnswer(String pro_detail, String answer, String explanation, String subject);
+
+    @Select("select subject from pro_answer where pro_no=#{pro_no}")
+    String getSubjectById(int pro_no);
+
 }

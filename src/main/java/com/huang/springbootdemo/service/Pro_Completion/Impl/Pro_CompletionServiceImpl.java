@@ -32,4 +32,9 @@ public class Pro_CompletionServiceImpl implements Pro_CompletionService {
         return result;
     }
 
+    @Override
+    public String getSubjectById(int pro_no) {
+        return pro_completionMapper.getSubjectById(pro_no);
+    }
+
 }

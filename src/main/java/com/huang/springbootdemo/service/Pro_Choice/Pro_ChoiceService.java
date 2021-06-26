@@ -14,4 +14,6 @@ public interface Pro_ChoiceService {
 
     int updateChoice(Pro_Choice pro_choice);
 
+    String getSubjectById(int pro_no);
+
 }

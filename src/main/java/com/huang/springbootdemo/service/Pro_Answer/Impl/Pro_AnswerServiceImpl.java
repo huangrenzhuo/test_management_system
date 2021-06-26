@@ -31,4 +31,9 @@ public class Pro_AnswerServiceImpl implements Pro_AnswerService {
         int result = pro_answerMapper.insertAnswer(pro_detail, answer, explanation, subject);
         return 0;
     }
+
+    @Override
+    public String getSubjectById(int pro_no) {
+        return pro_answerMapper.getSubjectById(pro_no);
+    }
 }

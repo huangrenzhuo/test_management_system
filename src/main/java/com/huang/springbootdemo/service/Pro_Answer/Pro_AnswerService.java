@@ -11,4 +11,6 @@ public interface Pro_AnswerService {
     List<Integer> getAllAnswerId();
 
     int insertAnswer(String pro_detail, String answer, String explanation, String subject);
+
+    String getSubjectById(int pro_no);
 }

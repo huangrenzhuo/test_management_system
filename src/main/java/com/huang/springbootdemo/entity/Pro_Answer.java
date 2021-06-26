@@ -11,7 +11,7 @@ public class Pro_Answer {
     private int pro_no;//问题编号
     @Column(name = "pro_detail",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String pro_detail;//问题内容
-    @Column(name = "answer",type = MySqlTypeConstant.VARCHAR,length = 255)
+    @Column(name = "answer",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String answer;//问题答案
     @Column(name = "explanation",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String explanation;//问题解析

@@ -3,6 +3,7 @@ package com.huang.springbootdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huang.springbootdemo.entity.Subject;
 import com.huang.springbootdemo.service.Student.Impl.StudentServiceImpl;
 import com.huang.springbootdemo.utils.GetUserContextUtil;
 import com.huang.springbootdemo.utils.Result;
@@ -16,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -120,5 +126,50 @@ public class StudentController {
         return Result.success("恭喜你发现这个彩蛋 MangoStudio 招聘 ");
     }
 
+    @RequestMapping(value = "/doProblem", method = RequestMethod.POST)
+    public Result<Object> doProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException{
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        String username = jsonObject.getString("username");
+        int pro_no = jsonObject.getInteger("pro_no");
+        String pro_type = jsonObject.getString("pro_type");
+        String answer = jsonObject.getString("answer");
+        studentService.doProblem(username,pro_no,pro_type,answer, new Date());
+        return Result.success("做题记录已加入数据库");
+    }
 
+    @RequestMapping(value = "/problemSum", method = RequestMethod.GET)
+    public Result<Object> getProblemSum(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException{
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        String type = jsonObject.getString("type");
+        String username = jsonObject.getString("username");
+        if(type.equals("byDate")){
+            int daySum = jsonObject.getInteger("daySum");
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            Map<String,Integer> map = new HashMap<>();
+            Date today = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(today);
+
+            for (int i = 0; i < daySum; i++) {
+                Date tempDate = c.getTime();
+//                int testInt = studentService.getProSumByDate(username,tempDate);
+                map.put(sdf.format(tempDate), studentService.getProSumByDate(username,tempDate));
+                c.add(Calendar.DAY_OF_MONTH, -1);
+            }
+            return Result.success(map);
+
+        }else if(type.equals("bySubject")){
+            Map<String,Integer> map = new HashMap<>();
+            for(Subject subject:Subject.values()){
+                int sum = studentService.getProSumBySubject(username,subject.getSubject());
+                map.put(subject.getSubject(),sum);
+            }
+            return Result.success(map);
+        }else{
+            return Result.fail(-1,"请输入正确的请求类型");
+        }
+
+    }
 }

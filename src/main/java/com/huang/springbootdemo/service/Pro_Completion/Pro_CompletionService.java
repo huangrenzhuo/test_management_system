@@ -13,4 +13,6 @@ public interface Pro_CompletionService {
 
     int insertCompletion(String pro_detail, int blank_num, String answer, String explanation, String subject);
 
+    String getSubjectById(int pro_no);
+
 }

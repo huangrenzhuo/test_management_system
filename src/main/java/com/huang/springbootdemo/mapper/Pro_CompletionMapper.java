@@ -24,4 +24,7 @@ public interface Pro_CompletionMapper {
     @Insert("insert into pro_completion(pro_detail, blank_num, answer, explanation, subject) values(#{pro_detail}, #{blank_num}, #{answer}, #{explanation}, #{subject})")
     int insertCompletion(String pro_detail, int blank_num, String answer, String explanation, String subject);
 
+    @Select("select subject from pro_completion where pro_no=#{pro_no}")
+    String getSubjectById(int pro_no);
+
 }

@@ -28,5 +28,7 @@ public interface Pro_ChoiceMapper {
     @Update("update pro_choice set #{option}=#{value} where pro_no=#{pro_no})")
     int updateChoice(String option, String value, int pro_no);
 
+    @Select("select subject from pro_choice where pro_no=#{pro_no}")
+    String getSubjectById(int pro_no);
 
 }

@@ -37,5 +37,10 @@ public class Pro_ChoiceServiceImpl implements Pro_ChoiceService {
         return 0;
     }
 
+    @Override
+    public String getSubjectById(int pro_no) {
+        return pro_choiceMapper.getSubjectById(pro_no);
+    }
+
 
 }

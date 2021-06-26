@@ -14,7 +14,7 @@ public class Pro_Completion {
     private String pro_detail;
     @Column(name = "blank_num",type = MySqlTypeConstant.INT)
     private int blank_num;
-    @Column(name = "answer",type = MySqlTypeConstant.VARCHAR,length = 255)
+    @Column(name = "answer",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String answer;
     @Column(name = "explanation",type = MySqlTypeConstant.VARCHAR,length = 2000)
     private String explanation;
