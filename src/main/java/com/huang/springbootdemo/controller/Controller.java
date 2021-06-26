@@ -58,14 +58,14 @@ public class Controller {
 
     }
 
-    @RequestMapping("/name")
-    public Result<String> name() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        return Result.success(name);
-
-    }
-
+//    @RequestMapping("/name")
+//    public Result<String> name() {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName();
+//        return Result.success(name);
+//
+//    }
+//
 
     @RequestMapping("/test")
     public void test(HttpServletResponse response) throws IOException {
