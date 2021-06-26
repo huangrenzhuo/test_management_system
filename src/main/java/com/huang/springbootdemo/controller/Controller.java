@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huang.springbootdemo.mapper.MyUserMapper;
 import com.huang.springbootdemo.service.MyUser.MyUserService;
+import com.huang.springbootdemo.service.Student.Impl.StudentServiceImpl;
+import com.huang.springbootdemo.service.Student.StudentService;
 import com.huang.springbootdemo.utils.Result;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,8 @@ public class Controller {
     MyUserMapper myUserMapper;
     @Resource
     MyUserService myUserService;
+    @Resource
+    StudentServiceImpl studentService;
 
     @RequestMapping("/register")
     public Result<Void> register(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
@@ -40,6 +44,10 @@ public class Controller {
         String password=jsonObject.getString("password");
         String authority=jsonObject.getString("authority");
         myUserService.register(username,password,authority);
+        if(authority.equals("student")){
+            studentService.addStudent(username,"","","","","","","");
+        }else if(authority.equals("teacher")){
+        }
         return Result.success();
     }
 

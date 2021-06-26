@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(myUserService).passwordEncoder(passwordEncoder());
     }
 
-    //将加密器放在容器中
+    //将加密器放在容器中 没有自定义 直接new BCryptPasswordEncoder
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // http.httpBasic() // HTTP Basic方式
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers().permitAll()
+                .antMatchers("login").permitAll()
                 .antMatchers().hasAuthority("administrator")//只有拥有这个权限才可以访问
                 .antMatchers().hasAnyAuthority(" responsible_man", "administrator")//拥有其中一个就可以访问
                 .antMatchers().hasRole("")//基于角色的控制访问在service生成时前面要加ROLE_,这里不用加

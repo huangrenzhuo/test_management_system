@@ -2,6 +2,7 @@ package com.huang.springbootdemo.service.MyUser;
 
 import com.huang.springbootdemo.mapper.MyUserMapper;
 import com.huang.springbootdemo.entity.MyUser;
+import com.huang.springbootdemo.mapper.StudentMapper;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+/***
+ * 实现UserDetailsService接口
+ */
 @Service
 public class MyUserService implements UserDetailsService {
 
@@ -19,11 +23,16 @@ public class MyUserService implements UserDetailsService {
     MyUserMapper myUserMapper;
 
     @Resource
+    StudentMapper studentMapper;
+
+    @Resource
     PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //根据username查询数据库
         MyUser myUser = myUserMapper.getUser(username);
+        //返回UserDetails
         UserDetails userDetails = User.withUsername(myUser.getUsername()).password(myUser.getPassword()).authorities(myUser.getAuthority()).roles().build();
         return userDetails;
     }
@@ -31,5 +40,6 @@ public class MyUserService implements UserDetailsService {
 
     public void register(String username, String password, String authority) {
         myUserMapper.addUser(username, passwordEncoder.encode(password), authority);
+
     }
 }

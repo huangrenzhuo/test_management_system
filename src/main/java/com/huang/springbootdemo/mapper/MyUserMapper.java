@@ -16,5 +16,4 @@ public interface MyUserMapper {
     @Insert("insert into user(username,password,authority) values(#{username},#{password},#{authority})")
     void addUser(String username, String password, String authority);
 
-
 }
