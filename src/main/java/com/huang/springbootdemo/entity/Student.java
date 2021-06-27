@@ -24,4 +24,5 @@ public class Student {
     public String sex;//性别
     @Column(name = "email", type = MySqlTypeConstant.VARCHAR, length = 111)
     public String email;//邮件
+
 }

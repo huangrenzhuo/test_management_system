@@ -19,4 +19,6 @@ spring:
     url: jdbc:mysql://120.79.218.158:3306/test?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
 
+system-params:
+  path: /home/huang/userImage
 

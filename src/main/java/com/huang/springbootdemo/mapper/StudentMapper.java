@@ -30,4 +30,6 @@ public interface StudentMapper {
 
     @Update("update student set email=#{email} where username=#{username} ")
     void updateEmail(String email, String username);
+
+
 }

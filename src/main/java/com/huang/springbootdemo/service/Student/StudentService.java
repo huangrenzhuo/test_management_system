@@ -15,4 +15,9 @@ public interface StudentService {
     void updateClass(String _class, String username);
 
     void updateEmail(String email, String username);
+
+    void saveUserImage(String path,String username);
+
+    String getUserImageSrc(String username);
+
 }
