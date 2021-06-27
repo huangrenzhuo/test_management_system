@@ -64,12 +64,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void doProblem(String username, int pro_no, String pro_type, String answer, Date date) {
-        studentMapper.doProblem(username, pro_no, pro_type, answer, date);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        studentMapper.doProblem(username, pro_no, pro_type, answer, sqlDate);
     }
 
     @Override
     public int getProSumByDate(String username, Date date) {
-        return studentMapper.getProSumByDate(username, date);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return studentMapper.getProSumByDate(username, sqlDate);
     }
 
     @Override

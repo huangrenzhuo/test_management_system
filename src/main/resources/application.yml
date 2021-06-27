@@ -16,5 +16,12 @@ spring:
     password: 123456aA@
     url: jdbc:mysql://120.79.218.158:3306/test?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
+logging:
+  level:
+    com:
+      huang:
+        springbootdemo:
+          mapper: debug
+
 
 
