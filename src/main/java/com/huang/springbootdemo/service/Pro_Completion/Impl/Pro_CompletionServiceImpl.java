@@ -33,8 +33,18 @@ public class Pro_CompletionServiceImpl implements Pro_CompletionService {
     }
 
     @Override
+    public int updateCompletion(String pro_detail, int blank_num, String answer, String explanation, String subject, int pro_no) {
+        return pro_completionMapper.updateCompletion(pro_detail, blank_num, answer, explanation, subject, pro_no);
+    }
+
+    @Override
     public String getSubjectById(int pro_no) {
         return pro_completionMapper.getSubjectById(pro_no);
+    }
+
+    @Override
+    public int deleteCompletion(int pro_no) {
+        return pro_completionMapper.deleteCompletion(pro_no);
     }
 
 }

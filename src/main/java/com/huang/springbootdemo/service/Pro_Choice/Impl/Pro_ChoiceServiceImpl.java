@@ -33,8 +33,13 @@ public class Pro_ChoiceServiceImpl implements Pro_ChoiceService {
     }
 
     @Override
-    public int updateChoice(Pro_Choice pro_choice) {
-        return 0;
+    public int updateChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject, int pro_no) {
+        return pro_choiceMapper.updateChoice(pro_detail, choice_a, choice_b, choice_c, choice_d, answer, explanation, subject, pro_no);
+    }
+
+    @Override
+    public int deleteChoice(int pro_no) {
+        return pro_choiceMapper.deleteChoice(pro_no);
     }
 
     @Override

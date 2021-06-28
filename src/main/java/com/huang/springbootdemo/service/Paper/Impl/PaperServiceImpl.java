@@ -31,4 +31,9 @@ public class PaperServiceImpl implements PaperService {
         return idList;
     }
 
+    @Override
+    public int deletePaper(int paper_no) {
+        return paperMapper.deletePaper(paper_no);
+    }
+
 }

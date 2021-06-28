@@ -12,7 +12,9 @@ public interface Pro_ChoiceService {
 
     int insertChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject);
 
-    int updateChoice(Pro_Choice pro_choice);
+    int updateChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject, int pro_no);
+
+    int deleteChoice(int pro_no);
 
     String getSubjectById(int pro_no);
 

@@ -1,10 +1,7 @@
 package com.huang.springbootdemo.mapper;
 
 import com.huang.springbootdemo.entity.Pro_Choice;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,10 +22,13 @@ public interface Pro_ChoiceMapper {
     @Insert("insert into pro_choice(pro_detail,choice_a,choice_b,choice_c,choice_d,answer,explanation,subject) values(#{pro_detail},#{choice_a},#{choice_b},#{choice_c},#{choice_d},#{answer},#{explanation},#{subject})")
     int insertChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject);
 
-    @Update("update pro_choice set #{option}=#{value} where pro_no=#{pro_no})")
-    int updateChoice(String option, String value, int pro_no);
+    @Update("update pro_choice set pro_detail=#{pro_detail}, choice_a=#{choice_a}, choice_b=#{choice_b}, choice_c=#{choice_c}, choice_d=#{choice_d}, answer=#{answer}, explanation=#{explanation}, subject=#{subject} where pro_no=#{pro_no}")
+    int updateChoice(String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject, int pro_no);
 
     @Select("select subject from pro_choice where pro_no=#{pro_no}")
     String getSubjectById(int pro_no);
+
+    @Delete("delete from pro_choice where pro_no=#{pro_no}")
+    int deleteChoice(int pro_no);
 
 }

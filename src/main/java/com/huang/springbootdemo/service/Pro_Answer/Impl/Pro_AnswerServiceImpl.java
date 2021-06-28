@@ -33,7 +33,17 @@ public class Pro_AnswerServiceImpl implements Pro_AnswerService {
     }
 
     @Override
+    public int updateAnswer(String pro_detail, String answer, String explanation, String subject, int pro_no) {
+        return pro_answerMapper.updateAnswer(pro_detail, answer, explanation, subject, pro_no);
+    }
+
+    @Override
     public String getSubjectById(int pro_no) {
         return pro_answerMapper.getSubjectById(pro_no);
+    }
+
+    @Override
+    public int deleteAnswer(int pro_no) {
+        return pro_answerMapper.deleteAnswer(pro_no);
     }
 }

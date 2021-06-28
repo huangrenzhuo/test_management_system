@@ -61,6 +61,59 @@ public class TeacherController {
         }
     }
 
+    @RequestMapping(value = "/problem", method = RequestMethod.PATCH)
+    public Result<Object> updateProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException{
+
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        String pro_type = jsonObject.getString("pro_type");
+        String pro_detail = jsonObject.getString("pro_detail");
+        String answer = jsonObject.getString("answer");
+        String explanation = jsonObject.getString("explanation");
+        String subject = jsonObject.getString("subject");
+        int pro_no = jsonObject.getInteger("pro_no");
+
+        if (pro_type.equals("pro_choice")) {
+            String choice_a = jsonObject.getString("choice_a");
+            String choice_b = jsonObject.getString("choice_b");
+            String choice_c = jsonObject.getString("choice_c");
+            String choice_d = jsonObject.getString("choice_d");
+            int result = pro_choiceService.updateChoice(pro_detail, choice_a, choice_b, choice_c, choice_d, answer, explanation, subject, pro_no);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_answer")) {
+            int result = pro_answerService.updateAnswer(pro_detail, answer, explanation, subject, pro_no);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_completion")) {
+            int blank_num = jsonObject.getInteger("blank_num");
+            int result = pro_completionService.updateCompletion(pro_detail, blank_num, answer, explanation, subject, pro_no);
+            return Result.success(result);
+        } else {
+            return Result.fail(-1, "错误的pro_type格式");
+        }
+
+
+    }
+
+    @RequestMapping(value = "/problem", method = RequestMethod.DELETE)
+    public Result<Object> deleteProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException{
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        int pro_no = jsonObject.getInteger("pro_no");
+        String pro_type = jsonObject.getString("pro_type");
+        if (pro_type.equals("pro_choice")) {
+            int result = pro_choiceService.deleteChoice(pro_no);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_answer")) {
+            int result = pro_answerService.deleteAnswer(pro_no);
+            return Result.success(result);
+        } else if (pro_type.equals("pro_completion")) {
+            int result = pro_completionService.deleteCompletion(pro_no);
+            return Result.success(result);
+        } else {
+            return Result.fail(-1, "错误的pro_type格式");
+        }
+    }
+
 
     @RequestMapping(value = "/problem", method = RequestMethod.POST)
     public Result<Object> putProblem(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
@@ -136,6 +189,15 @@ public class TeacherController {
             return Result.success(paper);
         }
 
+    }
+
+    @RequestMapping(value = "/paper", method = RequestMethod.DELETE)
+    public Result<Object> deletePaper(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException{
+        String body = StreamUtils.copyToString(httpServletRequest.getInputStream(), StandardCharsets.UTF_8);
+        JSONObject jsonObject = JSON.parseObject(body);
+        int paper_no = jsonObject.getInteger("paper_no");
+        int result = paperService.deletePaper(paper_no);
+        return Result.success(result);
     }
 
     @RequestMapping(value = "/paper", method = RequestMethod.GET)

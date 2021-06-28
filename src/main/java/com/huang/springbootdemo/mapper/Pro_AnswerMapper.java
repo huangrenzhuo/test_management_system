@@ -1,9 +1,7 @@
 package com.huang.springbootdemo.mapper;
 
 import com.huang.springbootdemo.entity.Pro_Answer;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,7 +22,13 @@ public interface Pro_AnswerMapper {
     @Insert("insert into pro_answer(pro_detail, answer, explanation, subject) values(#{pro_detail}, #{answer}, #{explanation}, #{subject})")
     int insertAnswer(String pro_detail, String answer, String explanation, String subject);
 
+    @Update("update pro_answer set pro_detail=#{pro_detail}, answer=#{answer}, explanation=#{explanation}, subject=#{subject} where pro_no=#{pro_no}")
+    int updateAnswer(String pro_detail, String answer, String explanation, String subject, int pro_no);
+
     @Select("select subject from pro_answer where pro_no=#{pro_no}")
     String getSubjectById(int pro_no);
+
+    @Delete("delete from pro_answer where pro_no=#{pro_no}")
+    int deleteAnswer(int pro_no);
 
 }

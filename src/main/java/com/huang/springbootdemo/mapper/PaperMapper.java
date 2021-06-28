@@ -1,6 +1,7 @@
 package com.huang.springbootdemo.mapper;
 
 import com.huang.springbootdemo.entity.Paper;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,7 @@ public interface PaperMapper {
 
     @Select("select paper_no from paper")
     List<Integer> getAllPaperId();
+
+    @Delete("delete from paper where paper_no=#{paper_no}")
+    int deletePaper(int pro_no);
 }

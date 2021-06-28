@@ -12,5 +12,9 @@ public interface Pro_AnswerService {
 
     int insertAnswer(String pro_detail, String answer, String explanation, String subject);
 
+    int updateAnswer(String pro_detail, String answer, String explanation, String subject, int pro_no);
+
     String getSubjectById(int pro_no);
+
+    int deleteAnswer(int pro_no);
 }

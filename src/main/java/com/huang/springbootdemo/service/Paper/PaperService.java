@@ -8,4 +8,5 @@ public interface PaperService {
     Paper getPaperById(int paper_no);
     int insertPaper(Paper paper);
     List<Integer> getAllPaperId();
+    int deletePaper(int paper_no);
 }
