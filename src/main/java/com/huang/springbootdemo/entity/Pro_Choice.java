@@ -104,4 +104,16 @@ public class Pro_Choice {
         this.explanation = explanation;
         this.subject = subject;
     }
+
+    public Pro_Choice(int pro_no, String pro_detail, String choice_a, String choice_b, String choice_c, String choice_d, String answer, String explanation, String subject) {
+        this.pro_no = pro_no;
+        this.pro_detail = pro_detail;
+        this.choice_a = choice_a;
+        this.choice_b = choice_b;
+        this.choice_c = choice_c;
+        this.choice_d = choice_d;
+        this.answer = answer;
+        this.explanation = explanation;
+        this.subject = subject;
+    }
 }

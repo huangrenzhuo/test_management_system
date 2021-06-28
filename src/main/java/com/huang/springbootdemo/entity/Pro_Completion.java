@@ -52,4 +52,13 @@ public class Pro_Completion {
         this.explanation = explanation;
         this.subject = subject;
     }
+
+    public Pro_Completion(int pro_no, String pro_detail, int blank_num, String answer, String explanation, String subject) {
+        this.pro_no = pro_no;
+        this.pro_detail = pro_detail;
+        this.blank_num = blank_num;
+        this.answer = answer;
+        this.explanation = explanation;
+        this.subject = subject;
+    }
 }

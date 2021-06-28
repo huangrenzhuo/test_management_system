@@ -44,4 +44,13 @@ public class Pro_Answer {
         this.explanation = explanation;
         this.subject = subject;
     }
+
+    public Pro_Answer(int pro_no, String pro_detail, String answer, String explanation, String subject) {
+        this.pro_no = pro_no;
+        this.pro_detail = pro_detail;
+        this.answer = answer;
+        this.explanation = explanation;
+        this.subject = subject;
+    }
+
 }
